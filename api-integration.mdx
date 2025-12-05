@@ -1,0 +1,179 @@
+---
+title: API Integration
+description: Guide to connecting Bazai agents with external APIs and services
+---
+
+## API Integration Overview
+
+Bazai agents can connect to external APIs to access real-time data, perform actions, and extend their capabilities beyond built-in features. This integration enables agents to interact with web services, databases, and third-party platforms.
+
+<Columns cols={3}>
+  <Card title="REST APIs" icon="globe" href="#rest-apis">
+    Connect to RESTful web services for data retrieval and actions.
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="#webhooks">
+    Receive real-time notifications and trigger agent actions.
+  </Card>
+  <Card title="Authentication" icon="lock" href="#authentication">
+    Secure your API connections with proper authentication methods.
+  </Card>
+</Columns>
+
+## REST API Integration
+
+Most web services use REST APIs, which Bazai agents can easily integrate with.
+
+<Steps>
+  <Step title="Identify Endpoints" icon="search">
+    Review the API documentation to understand available endpoints and their parameters.
+  </Step>
+  <Step title="Configure Authentication" icon="key">
+    Set up API keys, OAuth tokens, or other authentication methods.
+    
+    <CodeGroup tabs="API Key Setup">
+      ```python
+agent.add_api_integration({
+    'name': 'weather_api',
+    'base_url': 'https://api.weather.com/v1',
+    'auth_type': 'api_key',
+    'auth_config': {
+        'header_name': 'X-API-Key',
+        'key_value': 'your-api-key-here'
+    }
+})
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Test Connection" icon="check-circle">
+    Verify the integration works by making test API calls.
+  </Step>
+</Steps>
+
+<Tabs>
+  <Tab title="GET Requests" icon="download">
+    Retrieve data from external services.
+    
+    <Expandable title="Example: Weather Data" default-open="false">
+      ```javascript
+const weatherData = await agent.callAPI({
+  method: 'GET',
+  url: 'https://api.weather.com/v1/current',
+  params: { location: 'New York', unit: 'celsius' }
+});
+console.log(`Temperature: ${weatherData.temperature}°C`);
+      ```
+    </Expandable>
+  </Tab>
+  <Tab title="POST Requests" icon="upload">
+    Send data to external services.
+    
+    <Expandable title="Example: Send Email" default-open="false">
+      ```python
+response = agent.call_api(
+    method='POST',
+    url='https://api.email.com/v1/send',
+    headers={'Authorization': f'Bearer {token}'},
+    data={
+        'to': 'user@example.com',
+        'subject': 'Agent Notification',
+        'body': 'Your task is complete.'
+    }
+)
+      ```
+    </Expandable>
+  </Tab>
+</Tabs>
+
+<Callout kind="info">
+  Always implement proper error handling for API calls to ensure agent reliability.
+</Callout>
+
+## Webhook Integration
+
+Webhooks allow external services to push data to your agents in real-time.
+
+<Steps>
+  <Step title="Create Webhook Endpoint" icon="link">
+    Generate a unique webhook URL in Bazai for your agent.
+  </Step>
+  <Step title="Configure External Service" icon="settings">
+    Register the webhook URL with the external service.
+  </Step>
+  <Step title="Handle Incoming Data" icon="arrow-down">
+    Process webhook payloads and trigger appropriate agent actions.
+    
+    <CodeGroup tabs="Webhook Handler">
+      ```javascript
+agent.onWebhook('order_update', (payload) => {
+  const { order_id, status } = payload;
+  if (status === 'shipped') {
+    agent.sendNotification(`Order ${order_id} has been shipped!`);
+  }
+});
+      ```
+    </CodeGroup>
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="Webhook Security" default-open="true">
+    Implement security measures to verify webhook authenticity.
+    
+    - Use HTTPS for webhook URLs
+    - Verify webhook signatures if provided
+    - Implement rate limiting to prevent abuse
+  </Expandable>
+  <Expandable title="Error Handling" default-open="false">
+    Handle webhook failures gracefully.
+    
+    | Error Type | Response |
+    |------------|----------|
+    | Invalid signature | Return 401 Unauthorized |
+    | Malformed payload | Return 400 Bad Request |
+    | Server error | Return 500 Internal Server Error |
+  </Expandable>
+</ExpandableGroup>
+
+## Authentication Methods
+
+Secure your API integrations with appropriate authentication.
+
+<Tabs>
+  <Tab title="API Keys" icon="key">
+    Simple token-based authentication for most APIs.
+  </Tab>
+  <Tab title="OAuth" icon="shield">
+    Token-based authentication for user-authorized access.
+    
+    <Steps>
+      <Step title="Register Application" icon="user-plus">Register your agent as an OAuth application.</Step>
+      <Step title="Obtain Tokens" icon="refresh-cw">Complete the OAuth flow to get access tokens.</Step>
+      <Step title="Refresh Tokens" icon="rotate-cw">Handle token expiration with refresh flows.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="JWT" icon="lock">
+    JSON Web Tokens for stateless authentication.
+  </Tab>
+</Tabs>
+
+<Callout kind="danger">
+  Never hardcode API keys or tokens in your agent code. Use Bazai's secure credential storage.
+</Callout>
+
+## Best Practices
+
+Follow these guidelines for reliable API integrations.
+
+<Expandable title="Performance Optimization" default-open="false">
+  - Implement caching for frequently accessed data
+  - Use connection pooling for high-volume APIs
+  - Set appropriate timeouts to prevent hanging requests
+  - Monitor API usage and implement rate limiting
+</Expandable>
+
+<Expandable title="Error Handling" default-open="false">
+  - Implement retry logic with exponential backoff
+  - Handle different HTTP status codes appropriately
+  - Log errors for debugging and monitoring
+  - Provide fallback behavior when APIs are unavailable
+</Expandable>

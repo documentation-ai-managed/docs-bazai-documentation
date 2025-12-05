@@ -1,0 +1,180 @@
+openapi: '3.0.0'
+info:
+  version: 1.0.0
+  title: Bazai API
+  license:
+    name: MIT
+servers:
+  - url: https://api.bazai.com/v1
+paths:
+  /agents:
+    get:
+      summary: List all agents
+      operationId: listAgents
+      parameters:
+        - name: limit
+          in: query
+          description: How many items to return at one time (max 100)
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        200:
+          description: A paged array of agents
+          headers:
+            x-next:
+              description: A link to the next page of responses
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agents'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new AI agent
+      operationId: createAgent
+      responses:
+        201:
+          description: Agent created successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /agents/{agentId}:
+    get:
+      summary: Retrieve information for a specific AI agent
+      operationId: getAgent
+      parameters:
+        - name: agentId
+          in: path
+          required: true
+          description: The unique identifier of the agent to retrieve
+          schema:
+            type: string
+      responses:
+        200:
+          description: Detailed information about the requested agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agents'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Update an existing AI agent configuration
+      operationId: updateAgent
+      responses:
+        200:
+          description: Agent updated successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /tools:
+    get:
+      summary: List all available generative tools
+      operationId: listTools
+      responses:
+        200:
+          description: A list of all generative tools available in the platform
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tools'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      summary: Create a new generative tool
+      operationId: createTool
+      responses:
+        201:
+          description: Tool created successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /playground/sessions:
+    post:
+      summary: Start a new playground testing session
+      operationId: startPlaygroundSession
+      responses:
+        201:
+          description: Playground session started successfully
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Agent:
+      required:
+        - id
+        - name
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        status:
+          type: string
+          enum: [active, inactive, training]
+    Agents:
+      type: array
+      items:
+        $ref: '#/components/schemas/Agent'
+    Tool:
+      required:
+        - id
+        - name
+        - type
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        type:
+          type: string
+          enum: [content_generation, data_analysis, automation]
+        description:
+          type: string
+    Tools:
+      type: array
+      items:
+        $ref: '#/components/schemas/Tool'
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string

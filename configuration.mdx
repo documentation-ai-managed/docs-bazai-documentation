@@ -1,0 +1,195 @@
+---
+title: Configuration
+description: Complete guide to configuring Bazai agents and platform settings
+---
+
+## Platform Configuration
+
+Configuring Bazai involves setting up your account preferences, agent defaults, and integration settings. Proper configuration ensures optimal performance and security.
+
+<Columns cols={2}>
+  <Card title="Account Settings" icon="user" href="#account-settings">
+    Manage your profile, security, and billing preferences.
+  </Card>
+  <Card title="Agent Defaults" icon="settings" href="#agent-defaults">
+    Set default behaviors and limits for your agents.
+  </Card>
+</Columns>
+
+## Account Settings
+
+Your account settings control how you interact with the Bazai platform.
+
+<Tabs>
+  <Tab title="Profile" icon="user">
+    Update your personal information and preferences.
+    
+    <Steps>
+      <Step title="Basic Info" icon="edit">Update name, email, and contact details.</Step>
+      <Step title="Preferences" icon="sliders">Set language, timezone, and notification settings.</Step>
+      <Step title="Avatar" icon="image">Upload a profile picture or use generated avatar.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="Security" icon="lock">
+    Manage passwords, two-factor authentication, and API keys.
+    
+    <Expandable title="API Key Management" default-open="false">
+      ```bash
+      # Generate a new API key
+      bazai api-keys create --name "Production Key" --permissions "read,write"
+      
+      # List existing keys
+      bazai api-keys list
+      
+      # Revoke a key
+      bazai api-keys revoke --key-id "abc123"
+      ```
+    </Expandable>
+  </Tab>
+  <Tab title="Billing" icon="credit-card">
+    Monitor usage, manage subscriptions, and update payment methods.
+  </Tab>
+</Tabs>
+
+<Callout kind="info">
+  Enable two-factor authentication to add an extra layer of security to your account.
+</Callout>
+
+## Agent Configuration
+
+Configure how your agents behave and interact with users and systems.
+
+<Steps>
+  <Step title="Basic Settings" icon="settings">
+    Set agent name, description, and basic properties.
+  </Step>
+  <Step title="Personality Configuration" icon="user">
+    Define communication style, tone, and interaction patterns.
+    
+    <CodeGroup tabs="Personality Config">
+      ```json
+      {
+        "personality": {
+          "tone": "professional",
+          "formality": "moderate",
+          "verbosity": "concise",
+          "empathy_level": "high"
+        },
+        "response_patterns": {
+          "greeting": "Hello! How can I assist you today?",
+          "fallback": "I'm not sure about that. Let me check further."
+        }
+      }
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Capability Settings" icon="zap">
+    Enable or disable specific features and set limits.
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="Resource Limits" default-open="true">
+    Set limits to control costs and performance.
+    
+    | Setting | Default | Description |
+    |---------|---------|-------------|
+    | Max Tokens | 4000 | Maximum tokens per response |
+    | API Calls/Day | 1000 | Daily API call limit |
+    | Memory Size | 512MB | Agent memory allocation |
+    | Timeout | 30s | Maximum response time |
+  </Expandable>
+  <Expandable title="Environment Variables" default-open="false">
+    Configure environment-specific settings.
+    
+    ```bash
+    # Set environment variables
+    export BAZAI_ENV=production
+    export BAZAI_DEBUG=false
+    export BAZAI_API_TIMEOUT=30000
+    ```
+  </Expandable>
+</ExpandableGroup>
+
+## Integration Configuration
+
+Set up connections to external services and APIs.
+
+<Tabs>
+  <Tab title="API Connections" icon="plug">
+    Configure external API integrations.
+    
+    <Steps>
+      <Step title="Add Integration" icon="plus">Select the service to integrate with.</Step>
+      <Step title="Authenticate" icon="key">Provide credentials or API keys.</Step>
+      <Step title="Test Connection" icon="check">Verify the integration works.</Step>
+      <Step title="Configure Mappings" icon="arrow-right">Map data fields between systems.</Step>
+    </Steps>
+  </Tab>
+  <Tab title="Webhook Settings" icon="webhook">
+    Configure webhook endpoints and handlers.
+  </Tab>
+  <Tab title="Database Connections" icon="database">
+    Set up connections to external databases.
+    
+    <CodeGroup tabs="Database Config">
+      ```python
+db_config = {
+    'type': 'postgresql',
+    'host': 'your-db-host',
+    'port': 5432,
+    'database': 'agent_data',
+    'username': 'bazai_user',
+    'password': 'secure_password'
+}
+
+agent.connect_database(db_config)
+      ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Use environment variables for sensitive configuration values like API keys and database passwords.
+</Callout>
+
+## Advanced Configuration
+
+For power users, Bazai offers advanced configuration options.
+
+<Expandable title="Custom Models" default-open="false">
+  Configure custom AI models for specialized tasks.
+  
+  ```json
+  {
+    "custom_models": [
+      {
+        "name": "code_generator",
+        "model_type": "gpt-4",
+        "fine_tuned": true,
+        "training_data": "programming_examples.jsonl"
+      }
+    ]
+  }
+  ```
+</Expandable>
+
+<Expandable title="Performance Tuning" default-open="false">
+  Optimize agent performance for specific workloads.
+  
+  | Setting | Impact | Use Case |
+  |---------|--------|----------|
+  | High Precision | Slower, more accurate | Critical decisions |
+  | Fast Response | Quicker, less accurate | Chat applications |
+  | Balanced | Moderate speed/accuracy | General use |
+</Expandable>
+
+## Configuration Validation
+
+Always validate your configuration before deploying agents.
+
+<Steps>
+  <Step title="Syntax Check" icon="check">Verify configuration files have correct syntax.</Step>
+  <Step title="Test Configuration" icon="play">Run configuration tests in the playground.</Step>
+  <Step title="Monitor Performance" icon="bar-chart">Check for performance issues after deployment.</Step>
+</Steps>

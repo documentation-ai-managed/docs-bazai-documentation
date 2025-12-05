@@ -1,0 +1,154 @@
+---
+title: AI Agents
+description: Comprehensive guide to building and managing AI agents on Bazai
+---
+
+## Understanding AI Agents
+
+AI agents in Bazai are intelligent entities that can perform tasks, make decisions, and interact with users or other systems. They combine natural language processing, reasoning capabilities, and tool integrations to provide autonomous assistance.
+
+<Columns cols={2}>
+  <Card title="Agent Types" icon="users" href="#agent-types">
+    Learn about different agent architectures and use cases.
+  </Card>
+  <Card title="Agent Lifecycle" icon="refresh-cw" href="#lifecycle">
+    Understand how to develop, test, and deploy agents.
+  </Card>
+</Columns>
+
+## Agent Types
+
+Bazai supports various agent types to match different use cases and complexity levels.
+
+<Tabs>
+  <Tab title="Conversational" icon="message-square">
+    Designed for chat-based interactions, these agents excel at customer support, virtual assistants, and information retrieval.
+    
+    <CodeGroup tabs="Simple Chatbot">
+      ```python
+agent = ConversationalAgent(
+    name="SupportBot",
+    personality="friendly and knowledgeable",
+    knowledge_base="company_docs.pdf",
+    response_style="concise"
+)
+      ```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Task-Oriented" icon="check-square">
+    Focused on completing specific tasks like data analysis, content generation, or workflow automation.
+    
+    <Expandable title="Task Examples" default-open="false">
+      - Data analysis agents that process spreadsheets
+      - Content creation agents for marketing materials
+      - Workflow agents that coordinate multiple systems
+    </Expandable>
+  </Tab>
+  <Tab title="Collaborative" icon="users">
+    Multi-agent systems where individual agents work together on complex problems.
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Start with conversational agents if you're new to AI development - they're easier to build and test.
+</Callout>
+
+## Building Your First Agent
+
+Creating an agent involves defining its purpose, capabilities, and behavior patterns.
+
+<Steps>
+  <Step title="Define Purpose" icon="target">
+    Clearly articulate what the agent should accomplish. This guides all subsequent design decisions.
+  </Step>
+  <Step title="Select Architecture" icon="layers">
+    Choose between rule-based, machine learning, or hybrid approaches based on your requirements.
+  </Step>
+  <Step title="Configure Tools" icon="tool">
+    Integrate external tools and APIs to extend the agent's capabilities.
+    
+    <CodeGroup tabs="Tool Integration">
+      ```javascript
+const agent = new bazai.Agent();
+agent.addTool({
+  name: 'weather_api',
+  endpoint: 'https://api.weather.com/v1',
+  parameters: { location: 'string', unit: 'celsius|fahrenheit' }
+});
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Set Personality" icon="user">
+    Define the agent's communication style, tone, and interaction patterns.
+  </Step>
+</Steps>
+
+## Agent Lifecycle
+
+Managing agents involves continuous development, testing, and optimization.
+
+<ExpandableGroup>
+  <Expandable title="Development Phase" default-open="true">
+    During development, focus on building core functionality and basic interactions.
+    
+    <Steps>
+      <Step title="Prototype" icon="lightbulb">Create a basic version with minimal features.</Step>
+      <Step title="Iterate" icon="refresh-cw">Test and refine based on initial results.</Step>
+    </Steps>
+  </Expandable>
+  <Expandable title="Testing Phase" default-open="false">
+    Rigorous testing ensures reliability before deployment.
+    
+    | Test Type | Description | Frequency |
+    |-----------|-------------|-----------|
+    | Unit Tests | Test individual components | Daily |
+    | Integration Tests | Test tool interactions | Weekly |
+    | User Acceptance | Real-world scenario testing | Monthly |
+  </Expandable>
+  <Expandable title="Deployment Phase" default-open="false">
+    Moving agents to production requires monitoring and scaling considerations.
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="info">
+  Always test agents in the Bazai playground before deploying to production environments.
+</Callout>
+
+## Advanced Agent Features
+
+Once you master basic agents, explore these advanced capabilities.
+
+<Tabs>
+  <Tab title="Memory Systems" icon="database">
+    Agents with persistent memory can learn from interactions and improve over time.
+    
+    ```mermaid
+graph TD
+    A[User Input] --> B[Agent Processing]
+    B --> C[Memory Store]
+    C --> D[Response Generation]
+    D --> C
+    ```
+  </Tab>
+  <Tab title="Multi-Agent Coordination" icon="network">
+    Coordinate multiple agents to solve complex, multi-step problems.
+  </Tab>
+</Tabs>
+
+## Performance Optimization
+
+Optimize your agents for better performance and cost efficiency.
+
+<Steps>
+  <Step title="Monitor Usage" icon="bar-chart">Track API calls, response times, and error rates.</Step>
+  <Step title="Optimize Prompts" icon="edit">Refine prompts for more accurate and efficient responses.</Step>
+  <Step title="Cache Results" icon="archive">Implement caching for frequently requested data.</Step>
+</Steps>
+
+<Expandable title="Common Optimization Issues" default-open="false">
+  | Issue | Symptom | Solution |
+  |-------|---------|----------|
+  | High latency | Slow responses | Reduce prompt complexity, use caching |
+  | High costs | Expensive API usage | Optimize token usage, implement rate limiting |
+  | Inconsistent results | Variable quality | Standardize prompts, improve training data |
+</Expandable>

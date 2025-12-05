@@ -1,0 +1,120 @@
+---
+title: Getting Started
+description: Step-by-step guide to set up and begin using Bazai
+---
+
+## Setting Up Your Bazai Account
+
+Getting started with Bazai is straightforward. The platform is designed to minimize setup time so you can focus on building and testing AI agents. Follow these steps to create your account and configure your environment.
+
+<Steps>
+  <Step title="Create Account" icon="user-plus">
+    Visit the Bazai website and sign up with your email address. You'll receive a verification email to activate your account.
+    
+    <Callout kind="tip">
+      Use a professional email address as it will be used for API keys and notifications.
+    </Callout>
+  </Step>
+  <Step title="Verify Email" icon="mail">
+    Click the verification link in your email to confirm your account. This step is required to access the playground.
+  </Step>
+  <Step title="Set Up Profile" icon="settings">
+    Complete your profile with your name, organization, and preferences. This helps tailor the platform to your needs.
+  </Step>
+</Steps>
+
+## Exploring the Playground
+
+Once your account is set up, you'll have access to the Bazai playground - a sandbox environment for testing AI agents and generative tools.
+
+<Tabs>
+  <Tab title="Dashboard" icon="layout-dashboard">
+    The main dashboard provides an overview of your agents, recent activities, and quick access to tools.
+    
+    <CodeGroup tabs="Dashboard View">
+      ```json
+      {
+        "agents": [
+          {"name": "CustomerSupport", "status": "active", "last_used": "2024-10-15"},
+          {"name": "ContentGenerator", "status": "inactive", "last_used": "2024-10-10"}
+        ],
+        "usage_stats": {
+          "api_calls": 1250,
+          "tokens_used": 45000
+        }
+      }
+      ```
+    </CodeGroup>
+  </Tab>
+  <Tab title="Agent Builder" icon="wrench">
+    Use the visual builder to create agents without coding. Drag and drop components to define agent behavior.
+  </Tab>
+  <Tab title="Code Editor" icon="code">
+    For advanced users, the code editor provides full control over agent logic and integrations.
+    
+    <CodeGroup tabs="Agent Creation">
+      ```python
+from bazai import Agent, Tool
+
+# Create a customer support agent
+agent = Agent(
+    name="SupportBot",
+    personality="helpful and patient",
+    tools=[Tool("knowledge_base", "search_docs")]
+)
+
+# Test the agent
+response = agent.respond("How do I reset my password?")
+print(response)
+      ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="info">
+  The playground is completely free for testing and development. You only pay for production deployments.
+</Callout>
+
+## Your First Agent
+
+Let's build a simple agent that can answer questions about Bazai.
+
+<Steps>
+  <Step title="Choose Template" icon="file-text">
+    Select the "FAQ Assistant" template from the agent library.
+  </Step>
+  <Step title="Configure Knowledge" icon="database">
+    Upload or link to documentation that the agent should use as its knowledge base.
+  </Step>
+  <Step title="Test Interaction" icon="message-square">
+    Use the chat interface to test how the agent responds to questions.
+    
+    <Expandable title="Sample Interaction" default-open="false">
+      **User:** What are Bazai's pricing plans?
+      
+      **Agent:** Bazai offers three pricing tiers: Free (up to 100 API calls/day), Pro ($29/month for 10,000 calls), and Enterprise (custom pricing). The Free tier is perfect for testing and development.
+    </Expandable>
+  </Step>
+  <Step title="Refine Behavior" icon="sliders">
+    Adjust the agent's personality and response style based on your testing.
+  </Step>
+</Steps>
+
+<ExpandableGroup>
+  <Expandable title="Troubleshooting Common Issues" default-open="false">
+    If you encounter problems during setup, check these common solutions.
+    
+    | Issue | Solution |
+    |-------|----------|
+    | Email verification not received | Check your spam folder or request a new verification email |
+    | Cannot access playground | Ensure your account is verified and try logging out/in |
+    | Agent not responding | Check that the agent is active and has proper tool configurations |
+  </Expandable>
+  <Expandable title="Best Practices" default-open="false">
+    Start with simple agents and gradually add complexity. Regularly test and iterate on your creations.
+  </Expandable>
+</ExpandableGroup>
+
+## Next Steps
+
+Now that you have a basic agent running, explore advanced features like API integrations and multi-agent systems. Check out our documentation for detailed guides on these topics.

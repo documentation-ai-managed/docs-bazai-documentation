@@ -1,0 +1,99 @@
+---
+title: Introduction
+description: Overview of Bazai and its core capabilities
+---
+
+## Getting Started with Bazai
+
+Bazai is a comprehensive platform that empowers developers and teams to build, test, and manage intelligent AI agents and generative tools. It provides an intuitive playground environment where you can experiment with AI capabilities, integrate various APIs, and deploy your creations seamlessly. Whether you're a beginner exploring AI development or an experienced engineer refining complex systems, Bazai offers the tools you need to bring your AI ideas to life.
+
+<Columns cols={3}>
+  <Card title="Build Agents" icon="robot" href="ai-agents">
+    Create and customize AI agents with advanced reasoning capabilities and tool integrations.
+  </Card>
+  <Card title="API Integration" icon="plug" href="api-integration">
+    Connect your agents to external APIs and services for enhanced functionality.
+  </Card>
+  <Card title="Testing Playground" icon="play" href="configuration">
+    Test and refine your AI agents in a safe, controlled environment.
+  </Card>
+</Columns>
+
+## Core Features
+
+Bazai stands out with its user-friendly interface and powerful features that make AI development accessible.
+
+<Tabs>
+  <Tab title="Agent Creation" icon="plus">
+    Easily design AI agents using our visual builder or code editor. Define personalities, capabilities, and interaction patterns to match your specific use cases.
+    
+    <Steps>
+      <Step title="Define Agent" icon="user">
+        Start by outlining your agent's purpose, personality, and core competencies.
+      </Step>
+      <Step title="Configure Tools" icon="settings">
+        Integrate tools and APIs to extend your agent's capabilities.
+      </Step>
+      <Step title="Test & Iterate" icon="check-circle">
+        Use the playground to test interactions and refine behavior.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Generative Tools" icon="sparkles">
+    Access a library of pre-built generative tools for common AI tasks like content creation, data analysis, and automation.
+    
+    <CodeGroup tabs="Python,JavaScript">
+      ```python
+import bazai
+
+agent = bazai.Agent(name="ContentGenerator")
+result = agent.generate_content(topic="AI Ethics", length=500)
+print(result)
+      ```
+      ```javascript
+const bazai = require('bazai');
+
+const agent = new bazai.Agent({ name: 'ContentGenerator' });
+agent.generateContent({ topic: 'AI Ethics', length: 500 }).then(result => {
+  console.log(result);
+});
+      ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="info">
+  Bazai supports multiple programming languages and provides SDKs for seamless integration into your existing workflows.
+</Callout>
+
+<Expandable title="Advanced Capabilities" default-open="false">
+  Beyond basic agent creation, Bazai offers advanced features like multi-agent collaboration, custom model training, and performance analytics. These tools enable you to build sophisticated AI systems that can work together to solve complex problems.
+  
+  <ExpandableGroup>
+    <Expandable title="Multi-Agent Systems" default-open="true">
+      Create networks of AI agents that communicate and collaborate on tasks, mimicking real-world team dynamics.
+    </Expandable>
+    <Expandable title="Custom Training" default-open="false">
+      Train your agents on domain-specific data to improve accuracy and relevance for specialized applications.
+    </Expandable>
+  </ExpandableGroup>
+</Expandable>
+
+## Quick Start
+
+Get up and running with Bazai in minutes. Our platform provides intuitive tools and comprehensive documentation to help you build your first AI agent quickly.
+
+<Steps>
+  <Step title="Sign Up" icon="user-plus">
+    Create your Bazai account and verify your email address.
+  </Step>
+  <Step title="Explore Playground" icon="play-circle">
+    Access the playground environment to experiment with pre-built agents and tools.
+  </Step>
+  <Step title="Build Your First Agent" icon="wrench">
+    Use our visual builder to create a simple agent and test its capabilities.
+  </Step>
+  <Step title="Integrate APIs" icon="link">
+    Connect external APIs to enhance your agent's functionality.
+  </Step>
+</Steps>
